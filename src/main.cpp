@@ -1,15 +1,7 @@
-/*
- * Project:  Inverse Perspective Mapping
- *
- * File:     main.cpp
- *
- * Contents: Creation, initialisation and usage of IPM object
- *           for the generation of Inverse Perspective Mappings of images or videos
- *
- * Author:   Marcos Nieto <marcos.nieto.doncel@gmail.com>
- * Date:	 22/02/2014
- * Homepage: http://marcosnietoblog.wordpress.com/
- */
+//
+// \file: main.cpp 
+// \desc: Implementation of inverse perspective
+// mapping based on planar homography.
 
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -92,9 +84,11 @@ int main( int _argc, char** _argv )
     // Process
     clock_t begin = clock();
     ipm.applyHomography( inputImg, outputImg );		 
-    clock_t end = clock();
-    double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-    printf("%.2f (ms)\r", 1000*elapsed_secs);
+
+    std::cout << "elapsed time=" << double(clock()-begin) / CLOCKS_PER_SEC << std::endl;
+    //clock_t end = clock();
+    //double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+    //printf("%.2f (ms)\r", 1000*elapsed_secs);
     ipm.drawPoints(origPoints, inputImg );
     
     // View		
