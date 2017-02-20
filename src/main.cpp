@@ -2,13 +2,13 @@
 // \file: main.cpp 
 // \desc: Implementation of inverse perspective
 // mapping based on planar homography.
+#include <iostream>
+#include <stdio.h>
+#include <ctime>
 
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
-#include <iostream>
-#include <stdio.h>
-#include <ctime>
 
 #include "IPM.h"
 
@@ -24,7 +24,7 @@ int main( int _argc, char** _argv )
   if( _argc != 2 )
   {
     cout << "Usage: ./ipm <videofile>" << endl;
-    return 1;
+    return -1;
   }
 
   // Video
@@ -32,7 +32,7 @@ int main( int _argc, char** _argv )
   cv::VideoCapture video;
   if(!video.open(videoFileName)) {
     std::cout << "Cannot open the input video file, " << videoFileName << std::endl;
-    return 1;
+    return -1;
   }
 
   // Show video information
