@@ -47,17 +47,28 @@ int main( int _argc, char** _argv )
   
   // The 4-points at the input image	
   vector<Point2f> origPoints;
-  origPoints.push_back( Point2f(0, height) );
-  origPoints.push_back( Point2f(width, height) );
-  origPoints.push_back( Point2f(width/2+30, 140) );
-  origPoints.push_back( Point2f(width/2-50, 140) );
+  //origPoints.push_back( Point2f(0, height) );
+  //origPoints.push_back( Point2f(width, height) );
+  //origPoints.push_back( Point2f(width/2+30, 140) );
+  //origPoints.push_back( Point2f(width/2-50, 140) );
 
   // The 4-points correspondences in the destination image
   vector<Point2f> dstPoints;
-  dstPoints.push_back( Point2f(0, height) );
-  dstPoints.push_back( Point2f(width, height) );
-  dstPoints.push_back( Point2f(width, 0) );
-  dstPoints.push_back( Point2f(0, 0) );
+  //dstPoints.push_back( Point2f(0, height) );
+  //dstPoints.push_back( Point2f(width, height) );
+  //dstPoints.push_back( Point2f(width, 0) );
+  //dstPoints.push_back( Point2f(0, 0) );
+
+  // From the top left to bottom left in a clockwise order
+  origPoints.push_back( Point2f(160, 340) );
+  origPoints.push_back( Point2f(273, 340) );
+  origPoints.push_back( Point2f(370, 425) );
+  origPoints.push_back( Point2f(23, 425) );
+
+  dstPoints.push_back( Point2f(23, 340) );
+  dstPoints.push_back( Point2f(370, 340) );
+  dstPoints.push_back( Point2f(370, 425) );
+  dstPoints.push_back( Point2f(23, 425) );
 		
   // IPM object
   IPM ipm( Size(width, height), Size(width, height), origPoints, dstPoints );
