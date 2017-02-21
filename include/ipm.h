@@ -1,6 +1,22 @@
 #ifndef __IPM_H__
 #define __IPM_H__
 
+//
+// \desc A OpenCV wrapper of computing a planar homography
+// 
+// To generate an inverse perspective image from a given perspective
+// image
+// 
+// 1: Compute the planar homography matrix using two pairs of four
+// points using getPerspectiveTransform()
+
+// 2: Build a map of the transformation from a perspective image to an
+// inverse perspective image using createMaps()
+
+// 3: Given the map, generate an inverse perspective image from an
+// input perspective image using remap()
+// 
+//
 #include <opencv2/calib3d/calib3d.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -11,8 +27,17 @@
 class IPM
 {
 public:	
-  IPM( const cv::Size& _origSize, const cv::Size& _dstSize, 
-       const std::vector<cv::Point2f>& _origPoints, const std::vector<cv::Point2f>& _dstPoints );			
+  // \desc Constructor
+  // 
+  // \param[in] _origSize dimension of the input image
+  // \param[in] _dstSize dimension of the output image
+  // \param[in] _origPoints input four points
+  // \param[in] _dstPoints  mapped four points
+  IPM( const cv::Size& _origSize, 
+       const cv::Size& _dstSize, 
+       const std::vector<cv::Point2f>& _origPoints, 
+       const std::vector<cv::Point2f>& _dstPoints );			
+
   // Apply IPM on points
   cv::Point2d applyHomography(const cv::Point2d& _point, const cv::Mat& _H);
   cv::Point3d applyHomography( const cv::Point3d& _point, const cv::Mat& _H);

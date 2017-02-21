@@ -1,9 +1,8 @@
-#include "IPM.h"
+#include "ipm.h"
 
 using namespace cv;
 using namespace std;
 
-// Public
 IPM::IPM( const cv::Size& _origSize, 
 	  const cv::Size& _dstSize, 
 	  const std::vector<cv::Point2f>& _origPoints, 
@@ -13,8 +12,15 @@ IPM::IPM( const cv::Size& _origSize,
 	  m_origPoints(_origPoints), 
 	  m_dstPoints(_dstPoints)
 {
-  assert( m_origPoints.size() == 4 && m_dstPoints.size() == 4 && "Orig. points and Dst. points must vectors of 4 points" );
+  assert( m_origPoints.size() == 4 && 
+	  m_dstPoints.size() == 4 && 
+	  "Orig. points and Dst. points must vectors of 4 points" );
+
+  // compute the planar homography between source points,
+  // m_origPoints, and dest points, m_dstPoints
   m_H = getPerspectiveTransform( m_origPoints, m_dstPoints );
+
+  // compute the inverse of the estimated homography matrix
   m_H_inv = m_H.inv();
 		
   createMaps();	

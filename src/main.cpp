@@ -5,12 +5,13 @@
 #include <iostream>
 #include <stdio.h>
 #include <ctime>
+#include <chrono>
 
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 
-#include "IPM.h"
+#include "ipm.h"
 
 using namespace cv;
 using namespace std;
@@ -63,6 +64,8 @@ int main( int _argc, char** _argv )
 	
   // Main loop
   int frameNum = 0;
+
+  auto start = std::chrono::high_resolution_clock::now();
   
   for( ; ; )
   {
@@ -96,6 +99,13 @@ int main( int _argc, char** _argv )
     imshow("Output", outputImg);
     waitKey(1);
   }
+
+  auto finish = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double> elapsed = finish - start;
+  
+  std::cout << std::endl << "[info] elapsed time (wall clock_=" << elapsed.count()
+	    << ", number of image frames=" << frameNum
+	    << ", elapsed time per image frame in sec=" << elapsed.count() / frameNum << std::endl;
   
   return 0;	
 }		
